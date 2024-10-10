@@ -1,8 +1,123 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.section_1 {
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+}
+header {
+    display: flex;
+    flex-direction: column;
+    background-image: url(../zurag/facebok_bar.png);
+    background-position: center;
+    height:25% ;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-right: 80px;
+    padding-bottom: 37px;
+}   
+h4 {
+    font-size: 80px;
+}
+.navigation_first {
+    font-size: 20px;
+    padding-right: 30px ;
+}
+.navigation_first a {
+    padding-left: 3px;
+    padding-right: 2px;
+    color: black;
+}
+
+aside {
+    width: 20%;
+    height: 100vh;
+    border: 2px solid black;
+    padding: 2px 10px 2px 10px;
+    border: none;
+}
+.asidenavigation_0 {
+    display: flex;
+    flex-direction: column;
+    border: dotted;
+    border-radius: 5px;
+    width: 90%;
+    padding-bottom: 10px;
+}
+main {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    
+}
+.section_2 {
+    display: flex;
+    flex-direction: row;
+    height: 75%; 
+    padding-top: 10px;
+}
+.section_2_zuun {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around   ;
+    padding-right: 10px;
+}
+.tabletop {
+    background-color: blue;
+    color: aliceblue;
+}
+.tabler {
+   
+    width: 100%;
+    border: 1px solid black;
+    
+}
+.table1 {
+    width: 100%;
+  
+}
+.tabletd {
+    border: 1px solid black;
+    width: 100%;
+
+}
 table {
     border-collapse: collapse;
 }
-.container {
+.dottborder {
+    border: dotted;
+    width: 90%;
+    border-radius: 5px;
+    margin: 5px 5px 5px 5px;
+}
+button {
     
-
-    color: blue;
+}
+input {
+    width: 90%;
+}
+.asidenavigation_0 a{
+    padding-left: 10px;
+    padding-top: 5px;
+}
+td {
+    padding-left: 10px;
+}
+.td2 {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5px;
+    color: white;
+}
+.td2 a {
+    color: white;
+}
+#top {
+    height: 30px;
 }
