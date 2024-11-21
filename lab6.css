@@ -114,6 +114,8 @@ nav {
     flex-direction: row;
     justify-content: start;
 }
+
+
 #mid_bar {
     display: flex;
     flex-direction: row;
@@ -448,4 +450,9 @@ a {
 #join {
     color: aliceblue;
     font-weight: bold;
+}
+
+#aa_contain :hover {
+    font-size: 20px;
+    transition-duration: 0.5s;
 }
