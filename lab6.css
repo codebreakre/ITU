@@ -114,8 +114,6 @@ nav {
     flex-direction: row;
     justify-content: start;
 }
-
-
 #mid_bar {
     display: flex;
     flex-direction: row;
@@ -452,7 +450,17 @@ a {
     font-weight: bold;
 }
 
-#aa_contain :hover {
+#aa_contain:hover {
     font-size: 20px;
     transition-duration: 0.5s;
+}
+#a_contain:hover {
+    font-size: 20px;
+    transition-duration: 0.5s;
+}
+#a_contain {
+    transition-duration: 0.5s;
+}
+#aa_contain {
+    transition: 0.5s;
 }
