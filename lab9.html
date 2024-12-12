@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #word {
+            font-size: 24px;
+            letter-spacing: 5px;
+        }
+        #attempts, #guessed-letters, #hint {
+            margin: 10px 0;
+        }
+        #hangman-canvas {
+            border: 1px solid black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hangman Game</h1>
+    <div id="word"></div>
+    <div id="hint">Hint: </div>  
+    <div id="attempts">Attempts left: 6</div>
+    <div id="guessed-letters">Guessed letters: </div>
+    <input type="text" id="guess-input" maxlength="1" placeholder="Guess a letter">
+    <button id="guess-button">Guess</button>
+    <div id="message"></div>
+    
+    <canvas id="hangman-canvas" width="150" height="150"></canvas> 
+
+    <script>
+        const words = [
+            { word: "javascript", hint: "A programming language." },
+            { word: "programming", hint: "The process of writing code." },
+            { word: "hangman", hint: "A classic word-guessing game." },
+            { word: "developer", hint: "A person who writes code." },
+            { word: "browser", hint: "Software for accessing websites." }
+        ];
+
+        const randomWordObj = words[Math.floor(Math.random() * words.length)];
+        const randomWord = randomWordObj.word;
+        const hint = randomWordObj.hint;
+
+        let guessedWord = "_".repeat(randomWord.length).split("");
+        let attempts = 6;
+        let guessedLetters = [];
+
+        const wordDisplay = document.getElementById("word");
+        const attemptsDisplay = document.getElementById("attempts");
+        const guessedLettersDisplay = document.getElementById("guessed-letters");
+        const guessInput = document.getElementById("guess-input");
+        const guessButton = document.getElementById("guess-button");
+        const messageDisplay = document.getElementById("message");
+        const hintDisplay = document.getElementById("hint");
+        const canvas = document.getElementById("hangman-canvas");
+        const ctx = canvas.getContext("2d");
+
+        function drawHangman(attemptsLeft) {
+            ctx.lineWidth = 2;
+
+            switch (attemptsLeft) {
+                case 5: ctx.beginPath(); ctx.moveTo(50, 130); ctx.lineTo(100, 130); ctx.stroke(); break; // Base
+                case 4: ctx.beginPath(); ctx.moveTo(75, 130); ctx.lineTo(75, 30); ctx.stroke(); break; // Pole
+                case 3: ctx.beginPath(); ctx.moveTo(75, 30); ctx.lineTo(125, 30); ctx.stroke(); break; // Top beam
+                case 2: ctx.beginPath(); ctx.moveTo(125, 30); ctx.lineTo(125, 50); ctx.stroke(); break; // Rope
+                case 1: // Head
+                    ctx.beginPath();
+                    ctx.arc(125, 60, 10, 0, Math.PI * 2, true);
+                    ctx.stroke();
+                    break;
+                case 0: // Full body
+                    ctx.beginPath(); ctx.moveTo(125, 70); ctx.lineTo(125, 100); ctx.stroke(); // Body
+                    ctx.beginPath(); ctx.moveTo(125, 100); ctx.lineTo(115, 115); ctx.stroke(); // Left leg
+                    ctx.beginPath(); ctx.moveTo(125, 100); ctx.lineTo(135, 115); ctx.stroke(); // Right leg
+                    ctx.beginPath(); ctx.moveTo(125, 80); ctx.lineTo(115, 90); ctx.stroke(); // Left arm
+                    ctx.beginPath(); ctx.moveTo(125, 80); ctx.lineTo(135, 90); ctx.stroke(); // Right arm
+                    break;
+            }
+        }
+
+        function updateDisplay() {
+            wordDisplay.textContent = guessedWord.join(" ");
+            attemptsDisplay.textContent = `Attempts left: ${attempts}`;
+            guessedLettersDisplay.textContent = `Guessed letters: ${guessedLetters.join(", ")}`;
+            hintDisplay.textContent = `Hint: ${hint}`; 
+        }
+
+        function guessLetter(letter) {
+            if (guessedLetters.includes(letter)) {
+                messageDisplay.textContent = "You already guessed that letter!";
+                return;
+            }
+
+            guessedLetters.push(letter);
+            messageDisplay.textContent = "";
+
+            if (randomWord.includes(letter)) {
+                for (let i = 0; i < randomWord.length; i++) {
+                    if (randomWord[i] === letter) {
+                        guessedWord[i] = letter;
+                    }
+                }
+            } else {
+                attempts--;
+                messageDisplay.textContent = "Wrong guess!";
+                drawHangman(attempts); 
+            }
+
+            updateDisplay();
+
+            if (!guessedWord.includes("_")) {
+                messageDisplay.textContent = "Congratulations, you guessed the word!";
+                
+            } else if (attempts === 0) {
+                messageDisplay.textContent = `Game over! The word was: ${randomWord}`;
+                
+            }
+        }
+
+    
+        guessButton.addEventListener("click", () => {
+            const userInput = guessInput.value.toLowerCase();
+            if (userInput.length !== 1 || !/[a-z]/.test(userInput)) {
+                messageDisplay.textContent = "Please enter a single valid letter.";
+            } else {
+                guessLetter(userInput);
+            }
+            guessInput.value = "";
+            guessInput.focus();
+        });
+
+        updateDisplay();
+    </script>
+</body>
+</html>

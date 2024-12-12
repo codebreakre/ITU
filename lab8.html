@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+const currentTime = new Date().getHours(); 
+ const input = prompt("Та тоо оруулна уу:");
+ 
+ if (currentTime >= 6 && currentTime < 18) { 
+     const square = Math.pow(input, 2); 
+     alert(`Таны оруулсан тооны 2 зэрэг: ${square}`);
+ } else { 
+     const squareRoot = Math.sqrt(input); 
+     alert(`Таны оруулсан тооны язгуур: ${squareRoot}`);
+ }
+    </script>
+</body>
+</html>
