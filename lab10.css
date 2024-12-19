@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    justify-content: center;
+    font-size: 17px;
+}
+#titleList {
+    margin-top: 5%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.items {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    margin-top: 5px;
+    border: 1px solid black;
+    border-radius: 10000px;
+    background-color: aliceblue;
+    transition-duration: 0.5s;
+}
+.items:hover {
+    font-size: 18px;
+    transition-duration: 0.5s;
+
+}

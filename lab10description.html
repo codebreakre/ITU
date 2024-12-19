@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Description</title>
+    <link rel="stylesheet" href="lab10desc.css">
+</head>
+<body>
+   <div id="background"></div>
+   <script>
+        const xhr = new XMLHttpRequest();
+        const proxyUrl = 'https://corsproxy.io/';
+        const rssUrl = 'https://ikon.mn/rss/';
+        xhr.open('GET', proxyUrl + rssUrl , true);
+
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+
+
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(xhr.responseText, 'text/xml');
+                const items = xmlDoc.getElementsByTagName('item');
+                const titles = xmlDoc.getElementsByTagName('title');
+                const descriptions = xmlDoc.getElementsByTagName('description');
+                const dates = xmlDoc.getElementsByTagName('pubDate');
+                const background = document.getElementById('background');
+                
+            
+                const urlParams = new URLSearchParams(window.location.search);
+                const index =  parseInt(urlParams.get('index'), 10);
+
+                
+                    const title = titles[index].textContent;
+                    const description = descriptions[index].textContent;
+                    const date = dates[index].textContent;
+
+                    const titleElement = document.createElement('h1');
+                    const descriptionElement = document.createElement('p');
+                    const dateElement = document.createElement('p');
+
+                    titleElement.innerHTML = title;
+                    titleElement.className='title';
+                    descriptionElement.innerHTML = description;
+                    descriptionElement.className='description';
+                    dateElement.innerHTML = date;
+                    dateElement.className='date';
+
+                    background.appendChild(titleElement);
+                    background.appendChild(descriptionElement);
+                    background.appendChild(dateElement);
+               
+            }
+        };
+
+        xhr.send();
+   </script>
+</body>
+</html>

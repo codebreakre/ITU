@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="lab10.css">
+</head>
+<body>
+   <div id="titleList"></div>
+   <script>
+       const xhr = new XMLHttpRequest();
+const proxyUrl = 'https://corsproxy.io/';
+const rssUrl = 'https://ikon.mn/rss/';
+xhr.open('GET', proxyUrl + rssUrl , true);
+
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+
+        
+
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xhr.responseText, 'text/xml');
+        console.log(xmlDoc);
+        const channel = xmlDoc.getElementsByTagName('channel');
+        console.log(channel);   
+        const items = xmlDoc.getElementsByTagName('item');
+        console.log(items)
+        const titles = xmlDoc.getElementsByTagName('title');
+        const descriptions = xmlDoc.getElementsByTagName('description'); 
+        const background = document.getElementById('titleList');
+
+        background.innerHTML = "";
+
+        for (let i = 0; i < items.length; i++) {
+            const title = titles[i].textContent;
+
+            const listItem = document.createElement('div');
+            const titleElement = document.createElement('a');
+            listItem.className='items';
+
+            titleElement.textContent = title;
+            titleElement.href = `lab10description.html?index=${i}`;
+
+            background.appendChild(listItem);
+            listItem.appendChild(titleElement);
+            
+        }
+    }
+};
+
+xhr.send();
+
+   </script>
+</body>
+</html>
