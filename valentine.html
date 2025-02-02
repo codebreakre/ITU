@@ -69,8 +69,8 @@
 </head>
 <body>
   <div class="container">
-    <h1>Will you be my Valentine?🌹🥺</h1>
-    <p>Click the button below to lemme know, my cutie</p>
+    <h1 id="hello">Will you be my Valentine?🌹🥺</h1>
+    <p id="kitty">Click the button below to lemme know, my love</p>
     <button onclick="showResponse('Yes')">Yes, I will!🙂‍↕️🥰</button>
     <button id="noButton" onclick="showResponse('No')">No🙂‍↔️</button>
     <p id="response" class="hidden">Yay! You made me the happiest! 💖</p>
@@ -82,6 +82,8 @@
       // Hide buttons and show response
       document.querySelector('button').classList.add('hidden');
       document.getElementById('noButton').classList.add('hidden');
+      document.getElementById('hello').classList.add('hidden');
+      document.getElementById('kitty').classList.add('hidden');
       document.getElementById('response').classList.remove('hidden');
       document.getElementById('response1').classList.remove('hidden');
 
