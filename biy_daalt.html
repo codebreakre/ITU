@@ -5,82 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="biy_daalt.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    <div class="topper">
     <input type="text" id="input" placeholder="Enter a number">
     <button id="button">Submit</button>
-    </div>
-    <div id="chance"></div>
+    <p id="chance"></p>
     <div id="updates">
 
     </div>
     <script>
         let chances=10;
         let numberToGuess = Math.floor(Math.random() * 101);
-        console.log(numberToGuess);
         const chance=document.getElementById("chance");
-        const updates=document.getElementById("updates");
         document.getElementById("button").addEventListener("click", function(){
-            if(chances>0){
             let guessedNumber=document.getElementById("input").value;
-            
-            console.log(typeof(guessedNumber));
             const updateInfo=document.createElement("p");
+            const updates=document.getElementById("updates");
+
             if (isNaN(guessedNumber)) {
-                updateInfo.className="Nan";
-                updateInfo.textContent=guessedNumber+" Did not enter a number";
-                chances--;
-                chance.textContent=chances;
-                console.log(chances);
+                updates.className("NaN");
+                updates.textContent="Did not enter a number";
+            } else if (guessedNumber === numberToGuess) {
+                updates.className("Correct");
+                updates.textContent="Great, U WON!"
                 updates.appendChild(updateInfo);
                 return
-            } else if (guessedNumber == numberToGuess) {
-                updateInfo.className="Correct";
-                updateInfo.textContent="Great, U WON!"
-                updates.appendChild(updateInfo);
-                return
-            } else if (guessedNumber<=numberToGuess+1 && guessedNumber >= numberToGuess-1){
-                updateInfo.className="Near";
-                updateInfo.textContent=guessedNumber+" 1-iin range dotor orov";
-                chances--;
-                chance.textContent=chances;
+            } else if (guessedNumber<numberToGuess+1 && guessedNumber > numberToGuess-1){
+                updates.className("near");
+                updates.textContent="10-iin range dotor orov";
+                chance.textContent="${chances}$";
                 updates.appendChild(updateInfo);
                 return
             }else if (guessedNumber<numberToGuess+5 && guessedNumber > numberToGuess-5){
-                updateInfo.className="closeRange";
-                updateInfo.textContent=guessedNumber+" 5-iin range dotor orov";
-                chances--;
-                chance.textContent=chances;
+                updates.className("closeRange");
+                updates.textContent="5-iin range dotor orov";
+                chance.textContent="${chances}$";
                 updates.appendChild(updateInfo);
                 return
             }else if (guessedNumber<numberToGuess+10 && guessedNumber > numberToGuess-10){
-                updateInfo.className="midRange";
-                updateInfo.textContent=guessedNumber+" 10-iin range dotor orov";
-                chances--;
-                chance.textContent=chances;
-                updates.appendChild(updateInfo);
-                return
-            }else if (guessedNumber<numberToGuess+25 && guessedNumber > numberToGuess-25){
-                updateInfo.className="farRange";
-                updateInfo.textContent=guessedNumber+" 25-iin range dotor orov";
-                chances--;
-                chance.textContent=chances;
-                updates.appendChild(updateInfo);
-                return
-            }else{
-                updateInfo.className="tooFar";
-                updateInfo.textContent=guessedNumber+" Heterhii hol bn";
-                chances--;
-                chance.textContent=chances;
+                updates.className("midRange");
+                updates.textContent="10-iin range dotor orov";
+                chance.textContent="${chances}$";
                 updates.appendChild(updateInfo);
                 return
             }
-        }else{
-            chance.textContent="Game Over!";
-        }
             
         });
     </script>
